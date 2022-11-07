@@ -1,5 +1,7 @@
 package com.jacaranda.accesoDatos;
 
+import java.time.LocalDate;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -34,4 +36,21 @@ public class UserDAO {
 		}
 		return valid;
 	}
+	
+	public boolean addUser(String name, String password,String cName, LocalDate birthday, String gender) {
+		boolean resul=false;
+		User u= new User(name, password, cName, birthday, gender);
+		try {
+			session.getTransaction().begin();
+			session.saveOrUpdate(u);
+			session.getTransaction().commit();
+			resul=true;
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return resul;
+	}
+	
 }

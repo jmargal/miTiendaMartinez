@@ -1,28 +1,36 @@
 package com.jacaranda.logica;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="USER")
+@Entity(name = "USER")
 public class User {
 
 	@Id
 	@Column(name = "user_name")
 	private String name;
-	@Column(name="description")
 	private String password;
-	
+	private String complete_name;
+	private LocalDate birthday;
+	private String gender;
+	private boolean admin;
+
 	public User() {
 		super();
 	}
 
-	public User(String name, String password) {
+	public User(String name, String password, String completr_name, LocalDate birthday, String gender) {
 		super();
 		this.name = name;
 		this.password = password;
+		this.complete_name = completr_name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.admin = false;
 	}
 
 	public String getName() {
@@ -37,8 +45,36 @@ public class User {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getCompletr_name() {
+		return complete_name;
+	}
+
+	public void setCompletr_name(String completr_name) {
+		this.complete_name = completr_name;
+	}
+
+	public LocalDate getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	@Override
@@ -62,6 +98,5 @@ public class User {
 	public String toString() {
 		return "User [name=" + name + ", password=" + password + "]";
 	}
-	
-	
+
 }
