@@ -2,6 +2,9 @@ package com.jacaranda.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -28,6 +31,22 @@ public class Register extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	public static String getMD5(String input) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(input.getBytes());
+			BigInteger number = new BigInteger(1, messageDigest);
+			String hashtext = number.toString(16);
+
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -40,7 +59,7 @@ public class Register extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		String name = request.getParameter("user");
-		String password = request.getParameter("pass");
+		String password = getMD5(request.getParameter("pass"));
 		String cName = request.getParameter("cName");
 		DateTimeFormatter formateo = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate birthday = LocalDate.parse(request.getParameter("birthday"), formateo);

@@ -54,7 +54,7 @@ public class Main extends HttpServlet {
 				"<td>"+c.getName()+"</td>"+
 				"<td>"+c.getDescription()+"</td>"+
 				"<td>"+c.getId_cat()+"</td>"+
-				"<td><a href=mainArticles.jsp?id=" + c.getId_cat() +">See Articles</td>"+
+				"<td><a href=/miTiendaMartinez/mainArticles.jsp?id=" + c.getId_cat() +">See Articles</td>"+
 				"</tr>");
 			};
 		out.print("</table></html>");

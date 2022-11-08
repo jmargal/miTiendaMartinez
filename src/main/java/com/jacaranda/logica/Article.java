@@ -14,6 +14,7 @@ public class Article {
 	private int id;
 	private String name;
 	private String description;
+	private double price;
 	@ManyToOne
 	@JoinColumn(name = "id_cat")
 	private Category id_cat;
@@ -22,11 +23,12 @@ public class Article {
 		super();
 	}
 
-	public Article(int id, String name, String description, Category id_cat) {
+	public Article(int id, String name, String description, double price, Category id_cat) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.price = price;
 		this.id_cat = id_cat;
 	}
 
@@ -60,6 +62,14 @@ public class Article {
 
 	public void setId_cat(Category id_cat) {
 		this.id_cat = id_cat;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	@Override

@@ -35,9 +35,9 @@
 					type="text" required id="gender" name="gender">
 			</div>
 			<br>
-	</div>
+	
 	<br>
-	<input type="submit" value="Iniciar Sesión" id="boton">
+	<input type="submit" value="Create User" id="boton">
 	</form>
 	</div>
 </body>

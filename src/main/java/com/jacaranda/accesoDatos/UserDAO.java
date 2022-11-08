@@ -11,9 +11,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import com.jacaranda.logica.User;
 
 public class UserDAO {
-	StandardServiceRegistry sr;
-	SessionFactory sf;
-	Session session;
+	private StandardServiceRegistry sr;
+	private SessionFactory sf;
+	private Session session;
 
 	public UserDAO() {
 		super();
