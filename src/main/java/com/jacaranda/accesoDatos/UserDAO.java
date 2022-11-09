@@ -53,4 +53,9 @@ public class UserDAO {
 		return resul;
 	}
 	
+	public User findUser(String name) {
+		User u=(User)session.get(User.class, name);
+		return u;
+	}
+	
 }

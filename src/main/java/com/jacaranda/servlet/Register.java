@@ -58,18 +58,23 @@ public class Register extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
-		String name = request.getParameter("user");
-		String password = getMD5(request.getParameter("pass"));
-		String cName = request.getParameter("cName");
-		DateTimeFormatter formateo = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate birthday = LocalDate.parse(request.getParameter("birthday"), formateo);
-		String gender = request.getParameter("gender");
-		UserDAO ud = new UserDAO();
-		if (ud.addUser(name, password, cName, birthday, gender)) {
-			out.print("Hecho");
-		} else {
-			out.print("Error");
+		try {
+			String name = request.getParameter("user");
+			String password = getMD5(request.getParameter("pass"));
+			String cName = request.getParameter("cName");
+			DateTimeFormatter formateo = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			LocalDate birthday = LocalDate.parse(request.getParameter("birthday"), formateo);
+			String gender = request.getParameter("gender");
+			UserDAO ud = new UserDAO();
+			if (ud.addUser(name, password, cName, birthday, gender)) {
+				out.print("Usuario creado");
+			} else {
+				out.print("No se pudo crear el usuario");
+			}
+		}catch (Exception e) {
+			out.println("Error en la conexión a base de datos");
 		}
+		
 	}
 
 	/**

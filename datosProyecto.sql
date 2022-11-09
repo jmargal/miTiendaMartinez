@@ -47,21 +47,20 @@ alter table tienda.BUY add constraint fk_tienda.BUY foreign key (id_article) ref
 alter table tienda.BUY add constraint fk_tienda.BUY2 foreign key (user_name) references tienda.USER(user_name);
 
 
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('goliff0', '8e18f8ccf367e77504ef8e83a1626127', 'Gabrielle Oliff', '2022-05-26', 'Female', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('ntrobe1', '9bbb87bd08892b03e28a36606b658c4a', 'Nicky Trobe', '2021-11-28', 'Male', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('tcamilleri2', '443d8f947f3bee986eb64e521965a378', 'Tito Camilleri', '2021-11-28', 'Male', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('smacy3', '08076bdba5d89fd9400029b8d2296bcd', 'Siegfried Macy', '2022-08-06', 'Male', false);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('gsellars4', '25ad040a539cfd466e11f58bafffee5d', 'Gerry Sellars', '2022-02-27', 'Female', false);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('swilkins5', 'd0d886c084629e13b2c2613e41363694', 'Shell Wilkins', '2022-08-25', 'Agender', false);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('bkingett6', '522c8b309ae48f5d2ea7cb3390b22b05', 'Beverie Kingett', '2022-07-20', 'Bigender', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('jblyth7', '65d96c4bf5bdd9b92567f499d321e9f3', 'Jereme Blyth', '2022-03-06', 'Male', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('nolennane8', 'bd0ec0506c82e7e3afb440dc6bd2e5e3', 'Norbert O''Lennane', '2021-12-16', 'Male', false);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('bbillie9', '259668f3eb09515bc63b8858c5b52fcc', 'Berti Billie', '2022-03-24', 'Agender', false);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('vwipera', 'b592f112130119351259825ada27045f', 'Vergil Wiper', '2022-03-27', 'Male', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('nbuntinb', 'fecd905ec3475adf10cca626c9f9ef30', 'Norine Buntin', '2022-07-27', 'Female', false);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('fstanwayc', 'f2a1d8667be9e0f616e36ff4bac77da1', 'Flori Stanway', '2021-12-20', 'Female', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('jlillicropd', 'b76f843382a89024ac1013141207027c', 'Joscelin Lillicrop', '2022-05-18', 'Genderfluid', true);
-insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('dspurgeone', '34ab0be435949aab0eb22e0daf9ee289', 'Dulcia Spurgeon', '2021-12-28', 'Female', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('ugammon0', MD5('RhPSyNNCwU'), 'Ulises','2022-04-05', 'M', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('sandrichuk1', MD5('WVWId7Q'), 'Staci','2022-08-02', 'F', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('bstrickett2', MD5('GImdMnQ5If1q'), 'Basilius','2022-07-26', 'M', true);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('smckerlie3', MD5('lBLcrsVD1c'), 'Starlene','2021-12-21', 'F', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('ssmithyman4', MD5('H2tJbE'), 'Skipper','2021-12-25', 'M', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('lhaukey5', MD5('nMnklCiT'), 'Leonard','2021-12-14', 'M', true);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('gmorratt6', MD5('w85TlGHp'), 'Gaye','2022-03-13', 'F', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('gguyonnet7', MD5('OAmJToS'), 'Gale','2022-08-10', 'F', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('cfensome8', MD5('pQoh5U36Zy'), 'Concettina','2022-06-18', 'F', true);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('bgilliatt9', MD5('Tq5CMukj'), 'Babara','2022-03-09', 'F', true);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('lstoadea', MD5('iTkrNyEy1PSN'), 'Leshia','2022-06-25', 'F', true);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('kbrameltb', MD5('pCeLS1iNG0Yv'), 'Kacie', '2022-01-19', 'F', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('rtreanorc', MD5('6orZIjyye'), 'Roland', '2022-06-26', 'M', false);
+insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('ajeandilloud', MD5('e7BUfD4Y'), 'Ailina',  '2022-02-14', 'F', true);
 
 
 insert into tienda.CATEGORY (id_cat, name, description) values (1, 'video/x-mpeg', 'Etiam vel augue.');
