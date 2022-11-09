@@ -1,6 +1,6 @@
 CREATE DATABASE tienda;
 
-CREATE tienda.USER 'javier'@'%' IDENTIFIED BY 'martinez';
+CREATE USER 'javier'@'%' IDENTIFIED BY 'martinez';
 GRANT ALL PRIVILEGES ON tienda.* to 'javier'@'%';
 
 CREATE TABLE tienda.USER (
@@ -35,16 +35,16 @@ ALTER TABLE tienda.ARTICLE ADD PRIMARY KEY (id);
 ALTER TABLE tienda.ARTICLE ADD FOREIGN KEY (id_cat) REFERENCES tienda.CATEGORY(id_cat);
 
 
-CREATE TABLE BUY(
+CREATE TABLE tienda.BUY(
 id_article	int,
 user_name	varchar(50),
 price 		double,
-buy_date	date 
+tienda.buy_date	date 
 );
 
-alter table BUY add constraint pk_buy primary key (id_article,user_name);
-alter table BUY add constraint fk_buy foreign key (id_article) references tienda.ARTICLE(id);
-alter table BUY add constraint fk_buy2 foreign key (user_name) references tienda.USER(user_name);
+alter table tienda.BUY add constraint pk_tienda.BUY primary key (id_article,user_name);
+alter table tienda.BUY add constraint fk_tienda.BUY foreign key (id_article) references tienda.ARTICLE(id);
+alter table tienda.BUY add constraint fk_tienda.BUY2 foreign key (user_name) references tienda.USER(user_name);
 
 
 insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('goliff0', '8e18f8ccf367e77504ef8e83a1626127', 'Gabrielle Oliff', '2022-05-26', 'Female', true);
