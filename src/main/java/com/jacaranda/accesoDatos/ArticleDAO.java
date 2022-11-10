@@ -51,7 +51,8 @@ public class ArticleDAO {
 	}
 
 	public Article findArticle(int id) {
-		Article a = (Article) session.get(Article.class, id);
+		Article a=null;
+		a = (Article) session.get(Article.class, id);
 		return a;
 	}
 

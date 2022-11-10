@@ -29,7 +29,7 @@
 	//Si es admin le saco que pueda añadir article
 	if (u.isAdmin()) {
 	%>
-	<a href="addArticle.jsp">
+	<a href="addArticle.jsp?id=<%=id%>">
 		<button>Add new product</button>
 	</a>
 	<br>
@@ -59,7 +59,7 @@
 			<td><%=a.getName()%></td>
 			<td><%=a.getDescription()%></td>
 			<td><%=a.getPrice()%></td>
-			<td><%=a.getId_cat()%></td>
+			<td><%=a.getId_cat().getId_cat()%></td>
 		</tr>
 		<%
 		}
@@ -68,8 +68,8 @@
 	<br>
 	<!-- Form oculto para volver al login con esos atributos -->
 	<form action="/miTiendaMartinez/Login" method="post">
-		<input type="text" value=<%=name%> name="password" hidden="" > 
-		<input type="text" value=<%=password%>  name="user" hidden=""> 
+		<input type="text" value=<%=name%> name="password" hidden="">
+		<input type="text" value=<%=password%> name="user" hidden="">
 		<input type="submit" name="boton" id="boton" value="Go back">
 	</form>
 
