@@ -46,12 +46,12 @@ public class Register extends HttpServlet {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html");
@@ -66,25 +66,17 @@ public class Register extends HttpServlet {
 			LocalDate birthday = LocalDate.parse(request.getParameter("birthday"), formateo);
 			String gender = request.getParameter("gender");
 			UserDAO ud = new UserDAO();
-			if (ud.addUser(name, password, cName, birthday, gender)) {
+			if (ud.findUser(name) != null) {
+				out.print("Ya existe un usuario con ese nombre");
+			} else if (ud.addUser(name, password, cName, birthday, gender)) {
 				out.print("Usuario creado");
 			} else {
 				out.print("No se pudo crear el usuario");
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			out.println("Error en la conexión a base de datos");
 		}
-		
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

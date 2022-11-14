@@ -26,6 +26,9 @@
 	UserDAO udao = new UserDAO();
 	//Con esos atributos busco y guardo ese user
 	User u = udao.findUser(name);
+	if(u==null){
+		out.print("No se pasaron los parámetros adecuados");
+	}
 	//Si es admin le saco que pueda añadir article
 	if (u.isAdmin()) {
 	%>

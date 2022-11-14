@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try {
@@ -72,8 +72,17 @@ public class Login extends HttpServlet {
 				guardo cifrada*/
 				password = getMD5(password);	
 				UserDAO ud = new UserDAO();
-				//Si el usuario es válido muestro 
-				if (ud.validateUser(name, password)) {
+				//Si el usuario es válido muestro
+				if(ud.findUser(name)==null) {
+					out.print("<html><h1>Parece que no estás registrado</h1>"
+							+ "<h3>Do you want to sign up?</h3>"+"<a href=register.jsp>Sign Here!</a>"+
+							"<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+							+ "	</form>"+"</html>");
+				}
+				else if (ud.validateUser(name, password)) {
 					CategoryDAO cDao = new CategoryDAO();
 					out.print("<html>");
 					out.print("<h2>Categories</h2>");
@@ -88,25 +97,27 @@ public class Login extends HttpServlet {
 										+ c.getId_cat() + ">See Articles</td>" + "</tr>");
 					}
 					;
-					out.print("</table></html>");
+					out.print("</table><form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+							+ "	</form></html>");
 				//Si no es válido le digo que no está registrado
 				} else {
-					out.print("<html><h1>No estás registrado</h1></html>");
+					out.print("<html><h1>No valid password</h1>"
+							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+							+ "	</form></html>");
 				}
 			}
 		} catch (Exception e) {
 			out.println("<html><h1>Ocurrió un error inesperado en la conexión de base de datos</h1></html>");
 		}
 	}
+	
+	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+	
 }

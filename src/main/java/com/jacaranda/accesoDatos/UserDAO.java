@@ -47,6 +47,7 @@ public class UserDAO {
 			resul=true;
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+			session.getTransaction().rollback();
 		}
 		
 		
@@ -54,7 +55,8 @@ public class UserDAO {
 	}
 	
 	public User findUser(String name) {
-		User u=(User)session.get(User.class, name);
+		User u=null;
+		u=(User)session.get(User.class, name);
 		return u;
 	}
 	

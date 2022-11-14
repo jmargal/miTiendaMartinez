@@ -28,5 +28,12 @@
 	<a href="register.jsp">Sign Here!</a>
 	</div>
 	
+	<div id="closeSession">
+	<button></button>
+	<%HttpSession sesion=request.getSession();
+	sesion.invalidate();
+	%>
+	</div>
+	
 </body>
 </html>
