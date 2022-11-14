@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="styles/mainArticles.css">
 <meta charset="UTF-8">
 <title>Articles</title>
 </head>
@@ -19,6 +20,7 @@
 	int id = Integer.parseInt(request.getParameter("id"));
 	CategoryDAO cdao = new CategoryDAO();
 	Category c = new Category();
+	c = cdao.findCategory(id);
 	//Creo la sesion para recoger los atributos que tenía en el login
 	HttpSession sesion = request.getSession();
 	String name = (String) sesion.getAttribute("name");
@@ -30,8 +32,13 @@
 		out.print("No se pasaron los parámetros adecuados");
 	}
 	//Si es admin le saco que pueda añadir article
-	if (u.isAdmin()) {
 	%>
+	<div id=cat>
+		<h2>Category: <%=c.getName()%></h2>
+	</div>
+	<%if (u.isAdmin()) {
+	%>
+	
 	<a href="addArticle.jsp?id=<%=id%>">
 		<button>Add new product</button>
 	</a>
@@ -53,7 +60,7 @@
 
 		</tr>
 		<%
-		c = cdao.findCategory(id);
+		
 		List<Article> list = c.getArticleList();
 		for (Article a : list) {
 		%>

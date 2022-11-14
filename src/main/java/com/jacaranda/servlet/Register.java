@@ -58,23 +58,49 @@ public class Register extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
+		String name = request.getParameter("user");
+		String password = getMD5(request.getParameter("pass"));
+		
 		try {
-			String name = request.getParameter("user");
-			String password = getMD5(request.getParameter("pass"));
 			String cName = request.getParameter("cName");
 			DateTimeFormatter formateo = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate birthday = LocalDate.parse(request.getParameter("birthday"), formateo);
 			String gender = request.getParameter("gender");
 			UserDAO ud = new UserDAO();
 			if (ud.findUser(name) != null) {
-				out.print("Ya existe un usuario con ese nombre");
+				out.print("<html><h1>There is already an user with this name</h1>"
+							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+							+ "	</form>"
+							+ "</html>");
 			} else if (ud.addUser(name, password, cName, birthday, gender)) {
-				out.print("Usuario creado");
+				out.print("<html><h1>User created</h1>"
+						+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+						+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+						+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+						+ "	</form>"
+						+ "</html>");
 			} else {
-				out.print("No se pudo crear el usuario");
+				out.print("<html><h1>It seems there was a problem...</h1>"
+						+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+						+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+						+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+						+ "	</form>"
+						+ "</html>");
 			}
+			
 		} catch (Exception e) {
-			out.println("Error en la conexión a base de datos");
+			out.println("<html><h1>Problem connecting with database</h1>"
+						+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
+						+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+						+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+						+ "	</form>"
+						+ "</html>");
 		}
 
 	}

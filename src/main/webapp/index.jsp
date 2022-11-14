@@ -5,6 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Index</title>
+<link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 	<div id="loginData">
@@ -13,8 +14,7 @@
 			<div id="divUser">
 				User<br> <input type="text" required id="user" name="user">
 			</div>
-			<br>
-			<br>
+			
 			<div id="divPass">
 				Password<br> <input type="password" required id="password"
 					name="password">
@@ -28,12 +28,7 @@
 	<a href="register.jsp">Sign Here!</a>
 	</div>
 	
-	<div id="closeSession">
-	<button></button>
-	<%HttpSession sesion=request.getSession();
-	sesion.invalidate();
-	%>
-	</div>
+
 	
 </body>
 </html>
