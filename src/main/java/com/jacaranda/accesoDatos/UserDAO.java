@@ -39,7 +39,7 @@ public class UserDAO {
 	
 	public boolean addUser(String name, String password,String cName, LocalDate birthday, String gender) {
 		boolean resul=false;
-		User u= new User(name, password, cName, birthday, gender);
+		User u= new User(name, password, cName, birthday.plusDays(1), gender);
 		try {
 			session.getTransaction().begin();
 			session.saveOrUpdate(u);

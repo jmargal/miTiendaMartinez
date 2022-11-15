@@ -57,51 +57,46 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		/*Desde donde vengan me han tenido que mandar 
-		parámetros*/
+		/*
+		 * Desde donde vengan me han tenido que mandar parámetros
+		 */
 		String name = request.getParameter("user");
 		String password = request.getParameter("password");
-		if(name==null || password==null) {
+		if (name == null || password == null) {
 			out.print("<html><h1>Parameters required</h1>"
-							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
-							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
-							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
-							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>"
-							+ "</html>");
+					+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+					+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+					+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
+					+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n" + "	</form>"
+					+ "</html>");
 		}
-		
+
 		try {
-			
-			
-			/*Si no son nulos proceso*/
+
+			/* Si no son nulos proceso */
 			if (name != null && password != null) {
 				HttpSession sesion = request.getSession();
-				//Setteo atributos que voy a utilizar en el mainArticles
+				// Setteo atributos que voy a utilizar en el mainArticles
 				sesion.setAttribute("name", name);
 				sesion.setAttribute("password", password);
-				/*La cifro porque en la base de datos la
-				guardo cifrada*/
-				password = getMD5(password);	
+				/*
+				 * La cifro porque en la base de datos la guardo cifrada
+				 */
+				password = getMD5(password);
 				UserDAO ud = new UserDAO();
-				//Si el usuario es válido muestro
-				if(ud.findUser(name)==null) {
-					out.print("<html><h1>Parece que no estás registrado</h1>"
-							+ "<h3>Do you want to sign up?</h3>"+"<a href=register.jsp>Sign Here!</a>"+
-							"<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
-							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
-							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+				// Si el usuario es válido muestro
+				if (ud.findUser(name) == null) {
+					out.print("<html><h1>Parece que no estás registrado</h1>" + "<h3>Do you want to sign up?</h3>"
+							+ "<a href=register.jsp>Sign Here!</a>"
+							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>"+"</html>");
-				}
-				else if (ud.validateUser(name, password)) {
+							+ "	</form>" + "</html>");
+				} else if (ud.validateUser(name, password)) {
 					CategoryDAO cDao = new CategoryDAO();
-					out.print("<html><head>\r\n"
-							+ "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
-							+ "<meta charset=\"UTF-8\">\r\n"
-							+ "<title>Categories</title>\r\n"
-							+ "</head>"
-							+"<body>");
+					out.print("<html><head>\r\n" + "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
+							+ "<meta charset=\"UTF-8\">\r\n" + "<title>Categories</title>\r\n" + "</head>" + "<body>");
 					out.print("<h2>Categories</h2>");
 					List<Category> categoryList = cDao.devuelveCategories();
 					out.print("<table border=1>");
@@ -115,40 +110,29 @@ public class Login extends HttpServlet {
 					}
 					;
 					out.print("</table><form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
-							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
-							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>"
-							+ "</body>"
-							+ "</html>");
-				//Si no es válido le digo que no está registrado
+							+ "	</form>" + "</body>" + "</html>");
+					// Si no es válido le digo que no está registrado
 				} else {
 					out.print("<html><h1>No valid password</h1>"
 							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
-							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
-							+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>"
-							+"<div id=\"closeSession\">"
-							+"<button type=\"button\">"
-							+"Close session"     
-							+"</button>"
-							+"</div>"
-							+ "</html>");
+							+ "	</form>" + "<div id=\"closeSession\">" + "<button type=\"button\">" + "Close session"
+							+ "</button>" + "</div>" + "</html>");
 				}
 			}
 		} catch (Exception e) {
 			out.println("<html><h1>Problem connecting with database</h1>"
-						+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
-						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
-						+ "		<input type=\"text\" value="+ password+ " name=\"user\" hidden=\"\">\r\n"
-						+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-						+ "	</form>"
-						+ "</html>");
+					+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+					+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+					+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
+					+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n" + "	</form>"
+					+ "</html>");
 		}
 	}
-	
-	
 
-	
 }
