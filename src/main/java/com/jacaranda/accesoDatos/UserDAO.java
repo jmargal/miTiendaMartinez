@@ -1,29 +1,17 @@
 package com.jacaranda.accesoDatos;
 
+
+
 import java.time.LocalDate;
-
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-
 import com.jacaranda.logica.User;
 
+
 public class UserDAO {
-	private StandardServiceRegistry sr;
-	private SessionFactory sf;
-	private Session session;
+	
 
-	public UserDAO() {
-		super();
-		this.sr = new StandardServiceRegistryBuilder().configure().build();
-		;
-		this.sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-		this.session = sf.openSession();
-	}
-
-	public boolean validateUser(String login, String password) {
+	public static boolean validateUser(String login, String password) {
+		Session session = ConnectionBD.getSession();
 		boolean valid = false;
 		User u = (User) session.get(User.class, login);
 		if (u == null) {
@@ -37,7 +25,8 @@ public class UserDAO {
 		return valid;
 	}
 	
-	public boolean addUser(String name, String password,String cName, LocalDate birthday, String gender) {
+	public static boolean addUser(String name, String password,String cName, LocalDate birthday, String gender) {
+		Session session = ConnectionBD.getSession();
 		boolean resul=false;
 		User u= new User(name, password, cName, birthday.plusDays(1), gender);
 		try {
@@ -54,7 +43,8 @@ public class UserDAO {
 		return resul;
 	}
 	
-	public User findUser(String name) {
+	public static User findUser(String name) {
+		Session session = ConnectionBD.getSession();
 		User u=null;
 		u=(User)session.get(User.class, name);
 		return u;

@@ -13,18 +13,17 @@
 <body>
 	<%
 	int idCat = Integer.parseInt(request.getParameter("id_cat"));
-	ArticleDAO adao = new ArticleDAO();
-	CategoryDAO cdao = new CategoryDAO();
+
 	//Necesito la category pq para crear article necesito el object
-	Category c = cdao.findCategory(idCat);
+	Category c = CategoryDAO.findCategory(idCat);
 	Article a = new Article(Integer.parseInt(request.getParameter("idArticle")), request.getParameter("name"),
 			request.getParameter("desc"), Double.parseDouble(request.getParameter("price")), c);
 	//Si encuentra alguien con ese id es que ya existe
-	if (adao.findArticle(a.getId()) != null) {
+	if (ArticleDAO.findArticle(a.getId()) != null) {
 		out.write("No se pudo añadir el jugador porque ya existe uno con ese id!!");
 	}
 	//Si lo crea muestro mensaje
-	if (adao.addArticle(a)) {
+	if (ArticleDAO.addArticle(a)) {
 		out.write("Añadido con éxito");
 	}
 	%>

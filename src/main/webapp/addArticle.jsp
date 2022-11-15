@@ -14,11 +14,11 @@
 	<h1>Add a product</h1>
 
 	<%
-	CategoryDAO dao = new CategoryDAO();
-	List<Category> list = dao.devuelveCategories();
+	
+	List<Category> list = CategoryDAO.devuelveCategories();
 	HttpSession sesion = request.getSession();
 	int id = Integer.parseInt(request.getParameter("id"));
-	Category c = dao.findCategory(id);
+	Category c=CategoryDAO.findCategory(id);
 	%>
 
 

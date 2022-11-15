@@ -10,18 +10,9 @@ import com.jacaranda.logica.Article;
 
 public class ArticleDAO {
 
-	private StandardServiceRegistry sr;
-	private SessionFactory sf;
-	private Session session;
-
-	public ArticleDAO() {
-		super();
-		sr = new StandardServiceRegistryBuilder().configure().build();
-		sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-		session = sf.openSession();
-	}
-
-	public boolean addArticle(Article a) {
+	
+	public static boolean addArticle(Article a) {
+		Session session = ConnectionBD.getSession();
 		boolean resul = false;
 		try {
 			session.getTransaction().begin();
@@ -35,7 +26,8 @@ public class ArticleDAO {
 		return resul;
 	}
 
-	public boolean deleteArticle(int id) {
+	public static boolean deleteArticle(int id) {
+		Session session = ConnectionBD.getSession();
 		boolean resul = false;
 		try {
 			Article a = (Article) session.get(Article.class, id);
@@ -50,7 +42,8 @@ public class ArticleDAO {
 		return resul;
 	}
 
-	public Article findArticle(int id) {
+	public static Article findArticle(int id) {
+		Session session = ConnectionBD.getSession();
 		Article a=null;
 		a = (Article) session.get(Article.class, id);
 		return a;

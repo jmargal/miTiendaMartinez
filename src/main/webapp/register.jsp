@@ -31,13 +31,22 @@
 			</div>
 			<br>
 			<div id="divBirthDay">
-				<label for="birthday">Enter here your birthday (YYYY-MM-DD)</label><br>
-				<input type="text" required id="birthday" name="birthday">
+				<label for="birthday">Enter here your birthday</label><br>
+				<input type="date" required id="birthday" name="birthday">
 			</div>
 			<br>
 			<div id="divGender">
-				<label for="gender">Enter here your gender</label><br> <input
-					type="text" required id="gender" name="gender">
+				<p>Enter here your gender</p>
+				<input
+					type="radio" id="male" name="gender" value="M">  
+				<label for="male">Male</label>   
+				<input type="radio"
+					id="female" name="gender" value="F">   <label
+					for="female">Female</label>
+				<input type="radio"
+					id="ne" name="gender" value="N">   <label
+					for="ne">I prefer don't say it</label>	
+					<br>
 			</div>
 			<br> <br> <input type="submit" value="Create User"
 				id="boton">

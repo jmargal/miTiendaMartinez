@@ -83,9 +83,8 @@ public class Login extends HttpServlet {
 				 * La cifro porque en la base de datos la guardo cifrada
 				 */
 				password = getMD5(password);
-				UserDAO ud = new UserDAO();
 				// Si el usuario es válido muestro
-				if (ud.findUser(name) == null) {
+				if (UserDAO.findUser(name) == null) {
 					out.print("<html><h1>Parece que no estás registrado</h1>" + "<h3>Do you want to sign up?</h3>"
 							+ "<a href=register.jsp>Sign Here!</a>"
 							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
@@ -93,12 +92,12 @@ public class Login extends HttpServlet {
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>" + "</html>");
-				} else if (ud.validateUser(name, password)) {
-					CategoryDAO cDao = new CategoryDAO();
+				} else if (UserDAO.validateUser(name, password)) {
+
 					out.print("<html><head>\r\n" + "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
 							+ "<meta charset=\"UTF-8\">\r\n" + "<title>Categories</title>\r\n" + "</head>" + "<body>");
 					out.print("<h2>Categories</h2>");
-					List<Category> categoryList = cDao.devuelveCategories();
+					List<Category> categoryList = CategoryDAO.devuelveCategories();
 					out.print("<table border=1>");
 					out.print("<td>Name</td>" + "<td>Description</td>" + "<td>Id_cat</td>");
 					for (Category c : categoryList) {

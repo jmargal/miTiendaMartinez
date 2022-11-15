@@ -14,17 +14,9 @@ import com.jacaranda.logica.Category;
 
 public class CategoryDAO {
 
-	private StandardServiceRegistry sr;
-	private SessionFactory sf;
-	private Session sesion;
 
-	public CategoryDAO() {
-		sr = new StandardServiceRegistryBuilder().configure().build();
-		sf = new MetadataSources(sr).buildMetadata().buildSessionFactory();
-		sesion = sf.openSession();
-	}
-
-	public boolean addCategory(Category c) {
+	public static boolean addCategory(Category c) {
+		Session sesion = ConnectionBD.getSession();
 		boolean resul = false;
 		try {
 			sesion.getTransaction().begin();
@@ -38,7 +30,8 @@ public class CategoryDAO {
 		return resul;
 	}
 
-	public Category findCategory(int id) {
+	public static Category findCategory(int id) {
+		Session sesion = ConnectionBD.getSession();
 		Category aux = null;
 		try {
 			aux = sesion.get(Category.class, id);
@@ -48,7 +41,8 @@ public class CategoryDAO {
 		return aux;
 	}
 
-	public List<Category> devuelveCategories() {
+	public static List<Category> devuelveCategories() {
+		Session sesion = ConnectionBD.getSession();
 		Query query = sesion.createQuery("SELECT a FROM com.jacaranda.logica.Category a");
 		List<Category> conjunto = (List<Category>) query.getResultList();
 		return conjunto;

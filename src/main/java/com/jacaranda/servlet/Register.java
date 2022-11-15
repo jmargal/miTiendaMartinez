@@ -31,22 +31,6 @@ public class Register extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static String getMD5(String input) {
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] messageDigest = md.digest(input.getBytes());
-			BigInteger number = new BigInteger(1, messageDigest);
-			String hashtext = number.toString(16);
-
-			while (hashtext.length() < 32) {
-				hashtext = "0" + hashtext;
-			}
-			return hashtext;
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -59,15 +43,14 @@ public class Register extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		String name = request.getParameter("user");
-		String password = getMD5(request.getParameter("pass"));
+		String password = Login.getMD5(request.getParameter("pass"));
 		
 		try {
 			String cName = request.getParameter("cName");
 			DateTimeFormatter formateo = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate birthday = LocalDate.parse(request.getParameter("birthday"), formateo);
 			String gender = request.getParameter("gender");
-			UserDAO ud = new UserDAO();
-			if (ud.findUser(name) != null) {
+			if (UserDAO.findUser(name) != null) {
 				out.print("<html><h1>There is already an user with this name</h1>"
 							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
 							+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
@@ -75,7 +58,7 @@ public class Register extends HttpServlet {
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>"
 							+ "</html>");
-			} else if (ud.addUser(name, password, cName, birthday, gender)) {
+			} else if (UserDAO.addUser(name, password, cName, birthday, gender)) {
 				out.print("<html><h1>User created</h1>"
 						+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
 						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
