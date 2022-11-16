@@ -63,12 +63,12 @@ public class Login extends HttpServlet {
 		String name = request.getParameter("user");
 		String password = request.getParameter("password");
 		if (name == null || password == null) {
-			out.print("<html><h1>Parameters required</h1>"
-					+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+			out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parameters required</h1>"
+					+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 					+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 					+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 					+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n" + "	</form>"
-					+ "</html>");
+					+ "</body></html>");
 		}
 
 		try {
@@ -85,13 +85,13 @@ public class Login extends HttpServlet {
 				password = getMD5(password);
 				// Si el usuario es válido muestro
 				if (UserDAO.findUser(name) == null) {
-					out.print("<html><h1>Parece que no estás registrado</h1>" + "<h3>Do you want to sign up?</h3>"
+					out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parece que no estás registrado</h1>" + "<h3>Do you want to sign up?</h3>"
 							+ "<a href=register.jsp>Sign Here!</a>"
-							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+							+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>" + "</html>");
+							+ "	</form>" + "<body></html>");
 				} else if (UserDAO.validateUser(name, password)) {
 
 					out.print("<html><head>\r\n" + "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
@@ -108,29 +108,29 @@ public class Login extends HttpServlet {
 										+ c.getId_cat() + ">See Articles</td>" + "</tr>");
 					}
 					;
-					out.print("</table><form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+					out.print("</table><form action=\"index.jsp\" method=\"post\">\r\n"
 							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>" + "</body>" + "</html>");
 					// Si no es válido le digo que no está registrado
 				} else {
-					out.print("<html><h1>No valid password</h1>"
-							+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+					out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>No valid password</h1>"
+							+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>" + "<div id=\"closeSession\">" + "<button type=\"button\">" + "Close session"
-							+ "</button>" + "</div>" + "</html>");
+							+ "</button>" + "</div>" + "<body></html>");
 				}
 			}
 		} catch (Exception e) {
-			out.println("<html><h1>Problem connecting with database</h1>"
-					+ "<form action=\"/miTiendaMartinez/index.jsp\" method=\"post\">\r\n"
+			out.println("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Problem connecting with database</h1>"
+					+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 					+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 					+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 					+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n" + "	</form>"
-					+ "</html>");
+					+ "</body></html>");
 		}
 	}
 

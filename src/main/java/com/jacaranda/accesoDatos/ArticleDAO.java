@@ -22,6 +22,7 @@ public class ArticleDAO {
 			resul = true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			session.getTransaction().rollback();
 		}
 		return resul;
 	}
@@ -38,6 +39,7 @@ public class ArticleDAO {
 			resul = true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			session.getTransaction().rollback();
 		}
 		return resul;
 	}

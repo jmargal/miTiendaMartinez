@@ -3,6 +3,8 @@ package com.jacaranda.accesoDatos;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.hibernate.Session;
 import com.jacaranda.logica.User;
 
@@ -28,7 +30,7 @@ public class UserDAO {
 	public static boolean addUser(String name, String password,String cName, LocalDate birthday, String gender) {
 		Session session = ConnectionBD.getSession();
 		boolean resul=false;
-		User u= new User(name, password, cName, birthday.plusDays(1), gender);
+		User u= new User(name, password, cName, birthday, gender);
 		try {
 			session.getTransaction().begin();
 			session.saveOrUpdate(u);

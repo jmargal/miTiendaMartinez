@@ -9,6 +9,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>ExecAdd</title>
+<link rel="stylesheet" href="/styles/index.css">
 </head>
 <body>
 	<%

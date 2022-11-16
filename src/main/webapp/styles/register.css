@@ -87,28 +87,26 @@ input[type="submit"] {
 }
 
 
-#login{
-	font-size: xx-large;
+#regis{
+	font-size: x-large;
+	font-weight: bold;
 }
 
 
-#divUser{
-	font-size: large;
-	margin:1em;
-}
-
-#divPass{
-	font-size: large;
+label {
+    font-size: inherit;
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    max-width: var(--width-card-wide);
 }
 
 #form{
 	background-color: #8198ab;
 }
 
-#register{
-		background-color: #dae1e7;
-	
-}
+
+
+
 
 a {
     color: var(--color-link);

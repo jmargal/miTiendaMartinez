@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Register</title>
+<link rel="stylesheet" href="styles/register.css">
 </head>
 <body>
 	<%
@@ -18,8 +19,7 @@
 			<div id="divUser">
 				<label for="user">Enter here your user name</label><br> <input
 					type="text" required id="user" name="user">
-			</div>
-			<br>
+			</div><br>
 			<div id="divPassword">
 				<label for="pass">Enter here your password</label><br> <input
 					type="password" required id="pass" name="pass">
@@ -34,9 +34,9 @@
 				<label for="birthday">Enter here your birthday</label><br>
 				<input type="date" required id="birthday" name="birthday">
 			</div>
-			<br>
+			
 			<div id="divGender">
-				<p>Enter here your gender</p>
+				<br><label for=divGender >Enter here your gender</label> <br><br>
 				<input
 					type="radio" id="male" name="gender" value="M">  
 				<label for="male">Male</label>   
@@ -48,7 +48,7 @@
 					for="ne">I prefer don't say it</label>	
 					<br>
 			</div>
-			<br> <br> <input type="submit" value="Create User"
+			<input type="submit" value="Create User"
 				id="boton">
 		</form>
 	</div>

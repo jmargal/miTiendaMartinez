@@ -25,6 +25,7 @@ public class CategoryDAO {
 			// Si hace el commit significa que no ha habido error y pongo true
 			resul = true;
 		} catch (Exception e) {
+			sesion.getTransaction().rollback();
 			System.out.println(e.getMessage());
 		}
 		return resul;
@@ -36,6 +37,7 @@ public class CategoryDAO {
 		try {
 			aux = sesion.get(Category.class, id);
 		} catch (Exception e) {
+			sesion.getTransaction().rollback();
 			System.out.println(e.getMessage());
 		}
 		return aux;

@@ -1,6 +1,7 @@
 package com.jacaranda.logica;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;

@@ -9,6 +9,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Article</title>
+<link rel="stylesheet" href="styles/mainArticles">
 </head>
 <body>
 	<h1>Add a product</h1>
