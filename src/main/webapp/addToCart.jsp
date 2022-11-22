@@ -13,7 +13,7 @@
 <body>
 	<%
 	HttpSession sesion = request.getSession();
-	int idCat=(int)(sesion.getAttribute("idCat"));
+	int idCat = (int) (sesion.getAttribute("idCat"));
 	String name = (String) sesion.getAttribute("name");
 	String password = (String) sesion.getAttribute("password");
 	Carro cart = (Carro) sesion.getAttribute("carrito");
@@ -21,14 +21,12 @@
 	int idArticle = Integer.parseInt(request.getParameter("idArticle"));
 	ItemCarrito item = new ItemCarrito(idArticle, cant);
 	cart.addItem(item);
-	
+
 	out.println(cart.toString());
 	%>
 
 	<form action="mainArticles.jsp?id=<%=idCat%>" method="post">
-		<input type="text" value=<%=name%> name="user" hidden=""> <input
-			type="text" value=<%=password%> name="password" hidden=""> <input
-			type="submit" name="boton" id="boton" value="Go back">
+		<input type="submit" name="boton" id="boton" value="Go back">
 	</form>
 
 

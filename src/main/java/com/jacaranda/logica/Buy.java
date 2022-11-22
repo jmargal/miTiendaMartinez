@@ -8,7 +8,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Entity(name="BUY")
 @IdClass(BuyId.class)
 public class Buy {
 

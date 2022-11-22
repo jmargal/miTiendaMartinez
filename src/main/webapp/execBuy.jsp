@@ -47,8 +47,9 @@
 			type="text" value=<%=password%> name="password" hidden=""> <input
 			type="submit" name="boton" id="boton" value="Go to Login">
 	</form>
-	<form action="buyComplete.jsp">
+	<form action="buyComplete.jsp" method="post">
 		<input type="submit" name="boton" id="bot" value="Purchase">
+		
 	</form>
 </body>
 </html>

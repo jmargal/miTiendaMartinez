@@ -2,13 +2,14 @@ package com.jacaranda.logica;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class BuyId implements Serializable {
 
 	private int id_article;
 	private String user_name;
-	private LocalDate buy_date;
+	private LocalDateTime buy_date;
 
 	public BuyId() {
 		super();
@@ -30,11 +31,11 @@ public class BuyId implements Serializable {
 		this.user_name = user_name;
 	}
 
-	public LocalDate getBuy_date() {
+	public LocalDateTime getBuy_date() {
 		return buy_date;
 	}
 
-	public void setBuy_date(LocalDate buy_date) {
+	public void setBuy_date(LocalDateTime buy_date) {
 		this.buy_date = buy_date;
 	}
 
