@@ -1,3 +1,4 @@
+<%@page import="com.jacaranda.logica.Carro"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 <body>
 	<%
 	HttpSession sesion = request.getSession();
-	sesion.invalidate();
+	//sesion.invalidate();
 	%>
 	<div id="loginData">
 		<form action="Login" method="post" id="form">
@@ -23,6 +24,10 @@
 				Password<br> <input type="password" required id="password"
 					name="password">
 			</div>
+			<%
+			Carro cart = new Carro();
+			sesion.setAttribute("carrito", cart);
+			%>
 			<br> <input type="submit" value="Iniciar Sesión" id="boton">
 		</form>
 	</div>

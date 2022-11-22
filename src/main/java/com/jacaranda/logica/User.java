@@ -2,23 +2,31 @@ package com.jacaranda.logica;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity(name = "USER")
 public class User {
 
 	@Id
 	@Column(name = "user_name")
+	@GeneratedValue
 	private String name;
 	private String password;
 	private String complete_name;
 	private LocalDate birthday;
 	private String gender;
 	private boolean admin;
+	@OneToMany(mappedBy = "user_name", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Buy> artComprados;
 
 	public User() {
 		super();
@@ -64,6 +72,14 @@ public class User {
 
 	public String getGender() {
 		return gender;
+	}
+
+	public String getComplete_name() {
+		return complete_name;
+	}
+
+	public List<Buy> getArtComprados() {
+		return artComprados;
 	}
 
 	public void setGender(String gender) {

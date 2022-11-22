@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jacaranda.accesoDatos.CategoryDAO;
 import com.jacaranda.accesoDatos.UserDAO;
+import com.jacaranda.logica.Carro;
 import com.jacaranda.logica.Category;
 
 /**
@@ -97,6 +98,8 @@ public class Login extends HttpServlet {
 					out.print("<html><head>\r\n" + "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
 							+ "<meta charset=\"UTF-8\">\r\n" + "<title>Categories</title>\r\n" + "</head>" + "<body>");
 					out.print("<h2>Categories</h2>");
+					Carro cart = (Carro) sesion.getAttribute("carrito");
+					
 					List<Category> categoryList = CategoryDAO.devuelveCategories();
 					out.print("<table border=1>");
 					out.print("<td>Name</td>" + "<td>Description</td>" + "<td>Id_cat</td>");

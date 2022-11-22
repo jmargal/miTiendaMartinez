@@ -104,6 +104,7 @@ input[type="submit"]:hover {
 }
 
 
+
 button,
 input[type="submit"] {
     background-color: #6600cc;
@@ -119,4 +120,10 @@ input[type="submit"] {
     line-height: var(--line-height);
     margin: 0.5rem 0;
     padding: 1rem 2rem;
+}
+
+.formBuy {
+    border: 2px solid #6600cc;
+    font-size:small;
+    color: var(--color-bg);
 }

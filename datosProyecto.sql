@@ -31,6 +31,8 @@ price 		double,
 id_cat 		int 
 );
 
+ALTER TABLE tienda.ARTICLE ADD stock int;
+alter TABLE tienda.ARTICLE add img blob;
 ALTER TABLE tienda.ARTICLE ADD PRIMARY KEY (id);
 ALTER TABLE tienda.ARTICLE ADD FOREIGN KEY (id_cat) REFERENCES tienda.CATEGORY(id_cat);
 
@@ -39,12 +41,14 @@ CREATE TABLE tienda.BUY(
 id_article	int,
 user_name	varchar(50),
 price 		double,
-tienda.buy_date	date 
+buy_date	date,
 );
 
 alter table tienda.BUY add constraint pk_tienda.BUY primary key (id_article,user_name);
 alter table tienda.BUY add constraint fk_tienda.BUY foreign key (id_article) references tienda.ARTICLE(id);
 alter table tienda.BUY add constraint fk_tienda.BUY2 foreign key (user_name) references tienda.USER(user_name);
+alter TABLE tienda.BUY add cant int;
+
 
 
 insert into tienda.USER (user_name, password, complete_name, birthday, gender, admin) values ('ugammon0', MD5('RhPSyNNCwU'), 'Ulises','2022-04-05', 'M', false);
@@ -83,53 +87,103 @@ insert into tienda.CATEGORY (id_cat, name, description) values (15, 'video/x-msv
 
 
 
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (1, 'Prodder', 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.', 4675.81, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (2, 'Job', 'Aliquam sit amet diam in magna bibendum imperdiet.', 1829.22, 2);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (3, 'Temp', 'Nulla nisl.', 2326.99, 3);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (4, 'Veribet', 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.', 2330.05, 15);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (5, 'Bytecard', 'Morbi non quam nec dui luctus rutrum.', 3978.58, 2);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (6, 'Asoka', 'Nullam varius.', 2346.95, 8);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (7, 'Home Ing', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.', 4275.47, 3);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (8, 'Zoolab', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.', 4856.8, 8);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (9, 'It', 'Nam tristique tortor eu pede.', 4643.96, 3);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (10, 'Zoolab', 'Cras pellentesque volutpat dui.', 2618.52, 12);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (11, 'Solarbreeze', 'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', 1429.57, 7);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (12, 'Sonsing', 'In congue.', 3356.68, 5);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (13, 'Domainer', 'Praesent id massa id nisl venenatis lacinia.', 1494.7, 5);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (14, 'Trippledex', 'Phasellus sit amet erat.', 1043.68, 7);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (15, 'Kanlam', 'Aliquam sit amet diam in magna bibendum imperdiet.', 4091.11, 6);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (16, 'Wrapsafe', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 4524.47, 2);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (17, 'Otcom', 'Sed ante.', 2947.82, 15);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (18, 'Flowdesk', 'Quisque porta volutpat erat.', 2395.03, 1);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (19, 'Cookley', 'Nulla ac enim.', 4686.58, 8);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (20, 'Zoolab', 'Mauris sit amet eros.', 1620.71, 6);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (21, 'Temp', 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 3725.9, 8);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (22, 'Treeflex', 'Integer ac leo.', 2020.45, 6);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (23, 'Fintone', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 4275.08, 2);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (24, 'Cookley', 'Nulla facilisi.', 2557.84, 15);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (25, 'Treeflex', 'Donec posuere metus vitae ipsum.', 3926.46, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (26, 'Hatity', 'Mauris ullamcorper purus sit amet nulla.', 2300.62, 3);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (27, 'Bytecard', 'In hac habitasse platea dictumst.', 1929.77, 8);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (28, 'Treeflex', 'Duis consequat dui nec nisi volutpat eleifend.', 2538.21, 13);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (29, 'Tresom', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', 4247.6, 5);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (30, 'Ronstring', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', 1803.24, 7);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (31, 'Sub-Ex', 'Morbi ut odio.', 3664.69, 4);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (32, 'Redhold', 'Aliquam non mauris.', 4310.78, 11);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (33, 'Andalax', 'Quisque id justo sit amet sapien dignissim vestibulum.', 1709.17, 9);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (34, 'Zathin', 'Vivamus tortor.', 3680.46, 13);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (35, 'It', 'Ut tellus.', 2758.66, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (36, 'Bamity', 'Morbi non quam nec dui luctus rutrum.', 2670.21, 1);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (37, 'Ventosanzap', 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.', 4377.12, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (38, 'Matsoft', 'Sed vel enim sit amet nunc viverra dapibus.', 4516.73, 4);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (39, 'Trippledex', 'Sed ante.', 4107.09, 12);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (40, 'Zontrax', 'Mauris ullamcorper purus sit amet nulla.', 3329.91, 8);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (41, 'Zoolab', 'Vestibulum sed magna at nunc commodo placerat.', 3655.33, 6);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (42, 'Zontrax', 'Maecenas ut massa quis augue luctus tincidunt.', 3234.83, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (43, 'Bigtax', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', 1496.16, 14);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (44, 'Rank', 'Aliquam non mauris.', 2408.37, 7);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (45, 'Toughjoyfax', 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', 3305.7, 15);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (46, 'Fintone', 'In hac habitasse platea dictumst.', 3117.01, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (47, 'Zaam-Dox', 'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', 4620.47, 2);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (48, 'Solarbreeze', 'Phasellus in felis.', 1983.36, 1);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (49, 'Keylex', 'Aliquam non mauris.', 4044.44, 10);
-insert into tienda.ARTICLE (id, name, description, price, id_cat) values (50, 'Namfix', 'Aliquam erat volutpat.', 4329.5, 2);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (1, 'Tampflex', 'Phasellus id sapien in sapien iaculis congue.', 6946.67, 13, 85);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (2, 'Job', 'Curabitur convallis.', 2422.74, 6, 99);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (3, 'Aerified', 'Mauris sit amet eros.', 3513.78, 14, 25);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (4, 'Tres-Zap', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', 7239.61, 11, 56);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (5, 'Zoolab', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 8945.04, 6, 76);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (6, 'Bitchip', 'Nulla suscipit ligula in lacus.', 3727.74, 14, 85);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (7, 'Andalax', 'Etiam pretium iaculis justo.', 1259.56, 8, 79);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (8, 'Veribet', 'Donec quis orci eget orci vehicula condimentum.', 9186.58, 8, 76);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (9, 'Konklab', 'Curabitur gravida nisi at nibh.', 8568.99, 11, 48);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (10, 'Y-Solowarm', 'In hac habitasse platea dictumst.', 2263.45, 6, 21);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (11, 'Matsoft', 'Vestibulum sed magna at nunc commodo placerat.', 1790.42, 10, 63);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (12, 'Duobam', 'Phasellus sit amet erat.', 4966.14, 15, 5);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (13, 'Aerified', 'Pellentesque eget nunc.', 9458.52, 4, 94);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (14, 'Pannier', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', 3916.03, 2, 54);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (15, 'Vagram', 'Etiam faucibus cursus urna.', 4144.6, 14, 22);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (16, 'Voltsillam', 'Nam nulla.', 5621.99, 4, 34);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (17, 'Home Ing', 'In congue.', 8058.71, 8, 58);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (18, 'Bitchip', 'Integer a nibh.', 7505.92, 2, 2);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (19, 'Tampflex', 'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.', 1216.9, 9, 33);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (20, 'Tin', 'In hac habitasse platea dictumst.', 6246.18, 9, 15);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (21, 'Daltfresh', 'Suspendisse potenti.', 9793.61, 2, 69);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (22, 'Prodder', 'Cras non velit nec nisi vulputate nonummy.', 9184.68, 14, 18);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (23, 'Namfix', 'Fusce consequat.', 3162.81, 13, 99);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (24, 'Tempsoft', 'In quis justo.', 3872.99, 7, 82);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (25, 'Sub-Ex', 'Duis consequat dui nec nisi volutpat eleifend.', 9507.74, 2, 3);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (26, 'Y-Solowarm', 'Sed sagittis.', 4175.64, 5, 6);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (27, 'Job', 'Nulla justo.', 8276.29, 2, 23);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (28, 'Quo Lux', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 4424.52, 2, 4);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (29, 'Redhold', 'Nunc purus.', 7096.51, 8, 65);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (30, 'Lotstring', 'Integer tincidunt ante vel ipsum.', 1850.57, 7, 36);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (31, 'Tampflex', 'Donec vitae nisi.', 5246.26, 8, 16);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (32, 'Bitchip', 'Quisque porta volutpat erat.', 427.97, 9, 81);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (33, 'Domainer', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 5439.0, 2, 62);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (34, 'Viva', 'Nam nulla.', 4322.53, 7, 83);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (35, 'Opela', 'Vivamus in felis eu sapien cursus vestibulum.', 7647.7, 3, 1);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (36, 'Sub-Ex', 'Integer non velit.', 5263.12, 6, 45);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (37, 'Flexidy', 'Duis mattis egestas metus.', 9275.09, 8, 10);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (38, 'Pannier', 'Nulla mollis molestie lorem.', 3863.65, 6, 28);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (39, 'Holdlamis', 'In hac habitasse platea dictumst.', 2035.09, 10, 3);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (40, 'Flowdesk', 'Etiam vel augue.', 6770.54, 13, 8);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (41, 'Viva', 'Mauris sit amet eros.', 3116.72, 6, 53);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (42, 'Fintone', 'Fusce posuere felis sed lacus.', 8719.11, 15, 19);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (43, 'Kanlam', 'Donec vitae nisi.', 8071.33, 9, 14);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (44, 'Voyatouch', 'Donec semper sapien a libero.', 3984.52, 1, 23);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (45, 'It', 'Duis at velit eu est congue elementum.', 8183.92, 15, 91);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (46, 'Ventosanzap', 'Donec posuere metus vitae ipsum.', 9630.82, 14, 13);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (47, 'Asoka', 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', 6011.26, 6, 70);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (48, 'Bytecard', 'Vivamus tortor.', 7254.45, 12, 84);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (49, 'Temp', 'Vestibulum sed magna at nunc commodo placerat.', 9061.4, 1, 18);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (50, 'Sonair', 'In hac habitasse platea dictumst.', 1827.42, 9, 60);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (51, 'Bigtax', 'Morbi quis tortor id nulla ultrices aliquet.', 6758.25, 10, 28);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (52, 'Otcom', 'Nunc rhoncus dui vel sem.', 689.96, 11, 34);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (53, 'Pannier', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo.', 9723.17, 10, 55);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (54, 'Home Ing', 'Nulla nisl.', 329.75, 1, 66);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (55, 'Transcof', 'Curabitur at ipsum ac tellus semper interdum.', 739.92, 10, 33);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (56, 'Opela', 'Vestibulum ac est lacinia nisi venenatis tristique.', 5732.14, 5, 43);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (57, 'Keylex', 'Suspendisse potenti.', 1064.38, 9, 80);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (58, 'Solarbreeze', 'Duis ac nibh.', 4651.28, 14, 67);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (59, 'Bytecard', 'Vestibulum sed magna at nunc commodo placerat.', 4977.28, 12, 66);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (60, 'Ronstring', 'Nunc rhoncus dui vel sem.', 7506.87, 7, 38);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (61, 'Solarbreeze', 'Mauris ullamcorper purus sit amet nulla.', 995.83, 2, 78);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (62, 'Sonair', 'Maecenas pulvinar lobortis est.', 3265.19, 6, 2);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (63, 'Gembucket', 'In blandit ultrices enim.', 3714.77, 12, 46);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (64, 'Keylex', 'Etiam justo.', 9207.87, 12, 52);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (65, 'Voltsillam', 'Nunc rhoncus dui vel sem.', 4357.92, 13, 55);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (66, 'Sonair', 'Vivamus vestibulum sagittis sapien.', 708.5, 6, 77);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (67, 'Flowdesk', 'Vivamus tortor.', 6721.28, 13, 28);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (68, 'Subin', 'Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci.', 6121.75, 6, 60);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (69, 'Transcof', 'Duis aliquam convallis nunc.', 3064.37, 12, 86);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (70, 'Span', 'Phasellus id sapien in sapien iaculis congue.', 5444.41, 7, 15);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (71, 'Tresom', 'In hac habitasse platea dictumst.', 779.24, 11, 46);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (72, 'Toughjoyfax', 'Maecenas ut massa quis augue luctus tincidunt.', 8774.27, 6, 4);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (73, 'Stronghold', 'Nullam molestie nibh in lectus.', 3584.0, 15, 75);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (74, 'Tampflex', 'Mauris lacinia sapien quis libero.', 3679.74, 1, 33);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (75, 'Konklab', 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.', 7537.96, 4, 17);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (76, 'Regrant', 'Praesent lectus.', 2562.94, 9, 6);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (77, 'Transcof', 'In eleifend quam a odio.', 5130.9, 6, 82);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (78, 'Toughjoyfax', 'Praesent id massa id nisl venenatis lacinia.', 6474.25, 7, 95);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (79, 'Bitchip', 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.', 9667.96, 3, 95);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (80, 'Hatity', 'Aliquam sit amet diam in magna bibendum imperdiet.', 7043.28, 10, 45);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (81, 'Namfix', 'Mauris ullamcorper purus sit amet nulla.', 3400.07, 1, 13);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (82, 'Tampflex', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 377.79, 2, 22);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (83, 'Rank', 'Aliquam non mauris.', 3124.65, 15, 54);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (84, 'Bitwolf', 'Proin eu mi.', 7575.2, 4, 86);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (85, 'Wrapsafe', 'Pellentesque viverra pede ac diam.', 3365.09, 9, 90);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (86, 'Sub-Ex', 'Quisque porta volutpat erat.', 5522.97, 2, 62);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (87, 'Kanlam', 'Integer ac neque.', 2361.53, 15, 36);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (88, 'Bitwolf', 'Etiam justo.', 9770.9, 2, 89);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (89, 'Asoka', 'In est risus, auctor sed, tristique in, tempus sit amet, sem.', 6654.21, 10, 99);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (90, 'Tres-Zap', 'In congue.', 1135.44, 1, 27);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (91, 'Bytecard', 'Nulla facilisi.', 7810.95, 9, 68);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (92, 'Namfix', 'Donec posuere metus vitae ipsum.', 2508.64, 14, 93);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (93, 'Sonair', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 6692.6, 1, 56);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (94, 'Otcom', 'Nullam porttitor lacus at turpis.', 9830.91, 10, 32);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (95, 'Opela', 'Pellentesque eget nunc.', 5567.91, 14, 100);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (96, 'Daltfresh', 'Phasellus id sapien in sapien iaculis congue.', 9223.33, 2, 33);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (97, 'Konklux', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.', 7764.51, 14, 23);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (98, 'Fix San', 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 3179.31, 8, 80);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (99, 'Y-find', 'Cras in purus eu magna vulputate luctus.', 3359.94, 14, 21);
+insert into tienda.ARTICLE (id, name, description, price, id_cat, stock) values (100, 'Y-find', 'Maecenas ut massa quis augue luctus tincidunt.', 345.65, 13, 46);

@@ -13,5 +13,6 @@
   <mapping class="com.jacaranda.logica.User"/>
   <mapping class="com.jacaranda.logica.Category"/>
   <mapping class="com.jacaranda.logica.Article"/>
+  <mapping class="com.jacaranda.logica.Buy"/>
  </session-factory>
 </hibernate-configuration>
