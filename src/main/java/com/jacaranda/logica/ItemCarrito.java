@@ -31,7 +31,7 @@ public class ItemCarrito {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cant, id_article);
+		return Objects.hash(id_article);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class ItemCarrito {
 		if (getClass() != obj.getClass())
 			return false;
 		ItemCarrito other = (ItemCarrito) obj;
-		return cant == other.cant && id_article == other.id_article;
+		return id_article == other.id_article;
 	}
 
 	@Override
@@ -51,5 +51,4 @@ public class ItemCarrito {
 		return "ItemCarrito [id_article=" + id_article + ", cant=" + cant + "]";
 	}
 
-	
 }

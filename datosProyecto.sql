@@ -41,13 +41,15 @@ CREATE TABLE tienda.BUY(
 id_article	int,
 user_name	varchar(50),
 price 		double,
-buy_date	date,
+buy_date	datetime,
 );
 
-alter table tienda.BUY add constraint pk_tienda.BUY primary key (id_article,user_name);
+alter table tienda.BUY add constraint pk_tienda.BUY primary key (id_article,user_name,buy_date);
 alter table tienda.BUY add constraint fk_tienda.BUY foreign key (id_article) references tienda.ARTICLE(id);
 alter table tienda.BUY add constraint fk_tienda.BUY2 foreign key (user_name) references tienda.USER(user_name);
 alter TABLE tienda.BUY add cant int;
+ALTER TABLE tienda.BUY DROP PRIMARY KEY, ADD PRIMARY KEY (id_article, user_name, buy_date) USING BTREE;
+
 
 
 

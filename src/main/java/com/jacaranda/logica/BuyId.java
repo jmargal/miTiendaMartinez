@@ -12,7 +12,14 @@ public class BuyId implements Serializable {
 	private LocalDateTime buy_date;
 
 	public BuyId() {
+		
 		super();
+	}
+
+	public BuyId(int id_article, String user_name) {
+		super();
+		this.id_article = id_article;
+		this.user_name = user_name;
 	}
 
 	public int getId_article() {

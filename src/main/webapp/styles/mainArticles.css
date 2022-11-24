@@ -127,3 +127,13 @@ input[type="submit"] {
     font-size:small;
     color: var(--color-bg);
 }
+
+.botones{
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+
+.botones input{
+	margin:20px;
+}

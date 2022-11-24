@@ -1,3 +1,5 @@
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
+<%@page import="java.net.URI"%>
 <%@page import="com.jacaranda.logica.Carro"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -11,8 +13,20 @@
 <body>
 	<%
 	HttpSession sesion = request.getSession();
-	//sesion.invalidate();
+	String backUrl = request.getHeader("referer");
+	//Inicializo el carro que va a tener en la session
+	Carro cart = new Carro();
+	sesion.setAttribute("carrito", cart);
+	//Si la url de la que viene es null invalido la session para que tengan que hacer que login
+	if (backUrl != null) {
+		//Anulo y vuelvo a crear una session y carrito diferentes
+		sesion.invalidate();
+		sesion = request.getSession();
+		cart = new Carro();
+		sesion.setAttribute("carrito", cart);
+	}
 	%>
+
 	<div id="loginData">
 		<form action="Login" method="post" id="form">
 			<p id="login">miTienda</p>
@@ -24,10 +38,6 @@
 				Password<br> <input type="password" required id="password"
 					name="password">
 			</div>
-			<%
-			Carro cart = new Carro();
-			sesion.setAttribute("carrito", cart);
-			%>
 			<br> <input type="submit" value="Iniciar Sesión" id="boton">
 		</form>
 	</div>

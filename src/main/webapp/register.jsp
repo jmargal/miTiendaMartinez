@@ -53,10 +53,8 @@
 		</form>
 	</div>
 	<br>
-	<form action="/miTiendaMartinez/Login" method="post">
-		<input type="text" value=<%=name%> name="password" hidden="">
-		<input type="text" value=<%=password%> name="user" hidden="">
-		<input type="submit" name="boton" id="boton" value="Go back">
+	<form action="index.jsp" method="post">
+		<input type="submit" name="boton" id="bot" value="Go to login">
 	</form>
 </body>
 </html>

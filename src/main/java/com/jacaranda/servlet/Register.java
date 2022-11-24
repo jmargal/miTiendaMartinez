@@ -44,6 +44,7 @@ public class Register extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 
+		//Parametros que me han mandado
 		String name = request.getParameter("user");
 		String password = Login.getMD5(request.getParameter("pass"));
 		
@@ -52,6 +53,7 @@ public class Register extends HttpServlet {
 			LocalDateTime birthdayToConvert = LocalDateTime.of(LocalDate.parse(request.getParameter("birthday")),LocalTime.now());
 			LocalDate birthday=birthdayToConvert.toLocalDate();
 			String gender = request.getParameter("gender");
+			//Si ya existe ese user le digo que ya esta
 			if (UserDAO.findUser(name) != null) {
 				out.print("<html><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>There is already an user with this name</h1>"
 							+ "<form action=\"index.jsp\" method=\"post\">\r\n"
@@ -60,7 +62,9 @@ public class Register extends HttpServlet {
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</body></form>"
 							+ "</html>");
-			} else if (UserDAO.addUser(name, password, cName, birthday, gender)) {
+			} 
+			//Si devuelve boolean el metodo de addUser le muestro que se ha creado
+			else if (UserDAO.addUser(name, password, cName, birthday, gender)) {
 				out.print("<html><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>User created</h1>"
 						+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
@@ -68,7 +72,9 @@ public class Register extends HttpServlet {
 						+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 						+ "	</body></form>"
 						+ "</html>");
-			} else {
+			} 
+			//Si devolviera false le doy un error
+			else {
 				out.print("<html><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>It seems there was a problem...</h1>"
 						+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 						+ "		<input type=\"text\" value="+ name+ "name=\"password\" hidden=\"\">\r\n"
@@ -78,6 +84,7 @@ public class Register extends HttpServlet {
 						+ "</body></html>");
 			}
 			
+		//Si hay error en la bd le digo
 		} catch (Exception e) {
 			out.println("<html><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Problem connecting with database</h1>"
 						+ "<form action=\"index.jsp\" method=\"post\">\r\n"

@@ -9,7 +9,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Article</title>
-<link rel="stylesheet" href="styles/mainArticles">
+<link rel="stylesheet" href="styles/register.css">
 </head>
 <body>
 	<h1>Add a product</h1>
@@ -35,7 +35,7 @@
 		<br> <input type="submit" name="boton" id="bot" value="Enviar">
 	</form>
 	<br>
-	<a href="mainAticles.jsp?id=<%=c.getId_cat()%>">
+	<a href="mainArticles.jsp?id=<%=c.getId_cat()%>">
 		<button>Go back</button>
 	</a>
 </body>

@@ -35,6 +35,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	//Metodo que cifra passwords
 	public static String getMD5(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -60,6 +61,7 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		/*
 		 * Desde donde vengan me han tenido que mandar parámetros
+		 * Si son nulos le digo que no me ha mandado params
 		 */
 		String name = request.getParameter("user");
 		String password = request.getParameter("password");
@@ -84,7 +86,7 @@ public class Login extends HttpServlet {
 				 * La cifro porque en la base de datos la guardo cifrada
 				 */
 				password = getMD5(password);
-				// Si el usuario es válido muestro
+				// Si el no usuario es válido le digo que se registre
 				if (UserDAO.findUser(name) == null) {
 					out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parece que no estás registrado</h1>" + "<h3>Do you want to sign up?</h3>"
 							+ "<a href=register.jsp>Sign Here!</a>"
@@ -93,16 +95,19 @@ public class Login extends HttpServlet {
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>" + "<body></html>");
-				} else if (UserDAO.validateUser(name, password)) {
+				} 
+				//Si el usuario es valido le muestro todo
+				else if (UserDAO.validateUser(name, password)) {
 
 					out.print("<html><head>\r\n" + "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
 							+ "<meta charset=\"UTF-8\">\r\n" + "<title>Categories</title>\r\n" + "</head>" + "<body>");
 					out.print("<h2>Categories</h2>");
-					Carro cart = (Carro) sesion.getAttribute("carrito");
 					
+					//Hago una lista con todas la categorias
 					List<Category> categoryList = CategoryDAO.devuelveCategories();
 					out.print("<table border=1>");
 					out.print("<td>Name</td>" + "<td>Description</td>" + "<td>Id_cat</td>");
+					//Por cada categoria muestro nombre, id, etc. y un enlace para losa articles
 					for (Category c : categoryList) {
 						out.println(
 
@@ -116,8 +121,10 @@ public class Login extends HttpServlet {
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>" + "</body>" + "</html>");
-					// Si no es válido le digo que no está registrado
-				} else {
+					
+				}
+				// Si el user si existe pero la password no le digo que se ha equivocado
+				else {
 					out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>No valid password</h1>"
 							+ "<form action=\"index.jsp\" method=\"post\">\r\n"
 							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
@@ -127,6 +134,7 @@ public class Login extends HttpServlet {
 							+ "</button>" + "</div>" + "<body></html>");
 				}
 			}
+		//Si hay problemas al conectar cod bd muestro y le mando atras
 		} catch (Exception e) {
 			out.println("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Problem connecting with database</h1>"
 					+ "<form action=\"index.jsp\" method=\"post\">\r\n"

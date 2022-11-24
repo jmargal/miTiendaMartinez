@@ -7,6 +7,7 @@ import org.hibernate.Session;
 
 import com.jacaranda.logica.Article;
 import com.jacaranda.logica.Buy;
+import com.jacaranda.logica.BuyId;
 import com.jacaranda.logica.User;
 
 public class BuyDAO {
@@ -26,5 +27,13 @@ public class BuyDAO {
 		}
 		return resul;
 
+	}
+
+	public static Buy findBuy(Article id_article, User user_name) {
+		Session session = ConnectionBD.getSession();
+		BuyId id = new BuyId(id_article.getId(), user_name.getName());
+		Buy b = null;
+		b = (Buy) session.get(Buy.class, id);
+		return b;
 	}
 }
