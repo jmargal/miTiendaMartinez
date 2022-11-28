@@ -15,10 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jacaranda.accesoDatos.BuyDAO;
 import com.jacaranda.accesoDatos.CategoryDAO;
 import com.jacaranda.accesoDatos.UserDAO;
+import com.jacaranda.logica.Buy;
 import com.jacaranda.logica.Carro;
 import com.jacaranda.logica.Category;
+import com.jacaranda.logica.User;
 
 /**
  * Servlet implementation class Login
@@ -35,7 +38,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	//Metodo que cifra passwords
+	// Metodo que cifra passwords
 	public static String getMD5(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -60,18 +63,19 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		/*
-		 * Desde donde vengan me han tenido que mandar parámetros
-		 * Si son nulos le digo que no me ha mandado params
+		 * Desde donde vengan me han tenido que mandar parámetros Si son nulos le digo
+		 * que no me ha mandado params
 		 */
 		String name = request.getParameter("user");
 		String password = request.getParameter("password");
 		if (name == null || password == null) {
-			out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parameters required</h1>"
-					+ "<form action=\"index.jsp\" method=\"post\">\r\n"
-					+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
-					+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
-					+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n" + "	</form>"
-					+ "</body></html>");
+			out.print(
+					"<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parameters required</h1>"
+							+ "<form action=\"index.jsp\" method=\"post\">\r\n" + "		<input type=\"text\" value="
+							+ name + "name=\"password\" hidden=\"\">\r\n" + "		<input type=\"text\" value="
+							+ password + " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+							+ "	</form>" + "</body></html>");
 		}
 
 		try {
@@ -88,26 +92,27 @@ public class Login extends HttpServlet {
 				password = getMD5(password);
 				// Si el no usuario es válido le digo que se registre
 				if (UserDAO.findUser(name) == null) {
-					out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parece que no estás registrado</h1>" + "<h3>Do you want to sign up?</h3>"
-							+ "<a href=register.jsp>Sign Here!</a>"
-							+ "<form action=\"index.jsp\" method=\"post\">\r\n"
-							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
-							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
-							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>" + "<body></html>");
-				} 
-				//Si el usuario es valido le muestro todo
+					out.print(
+							"<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Parece que no estás registrado</h1>"
+									+ "<h3>Do you want to sign up?</h3>" + "<a href=register.jsp>Sign Here!</a>"
+									+ "<form action=\"index.jsp\" method=\"post\">\r\n"
+									+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+									+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
+									+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+									+ "	</form>" + "<body></html>");
+				}
+				// Si el usuario es valido le muestro todo
 				else if (UserDAO.validateUser(name, password)) {
-
+					User u = UserDAO.findUser(name);
 					out.print("<html><head>\r\n" + "<link rel=\"stylesheet\" href=\"styles/mainArticles.css\">\r\n"
 							+ "<meta charset=\"UTF-8\">\r\n" + "<title>Categories</title>\r\n" + "</head>" + "<body>");
 					out.print("<h2>Categories</h2>");
-					
-					//Hago una lista con todas la categorias
+
+					// Hago una lista con todas la categorias
 					List<Category> categoryList = CategoryDAO.devuelveCategories();
 					out.print("<table border=1>");
-					out.print("<td>Name</td>" + "<td>Description</td>" + "<td>Id_cat</td>");
-					//Por cada categoria muestro nombre, id, etc. y un enlace para losa articles
+					out.print("<tr><td>Name</td>" + "<td>Description</td>" + "<td>Id_cat</td></tr>");
+					// Por cada categoria muestro nombre, id, etc. y un enlace para losa articles
 					for (Category c : categoryList) {
 						out.println(
 
@@ -115,33 +120,44 @@ public class Login extends HttpServlet {
 										+ c.getId_cat() + "</td>" + "<td><a href=/miTiendaMartinez/mainArticles.jsp?id="
 										+ c.getId_cat() + ">See Articles</td>" + "</tr>");
 					}
+					out.print("</table>");
 					;
-					out.print("</table><form action=\"index.jsp\" method=\"post\">\r\n"
+					out.print("<h2>Articles bought by " + u.getName() + "</h2>");
+					out.print("<form action=\"articlesBoughtBy.jsp\" method=\"post\">\r\n"
+							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"See articles you have bougth\">\r\n"
+							+ "	</form>" + "</body>" + "</html>");
+					
+					
+					out.print("<form action=\"index.jsp\" method=\"post\">\r\n"
 							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
 							+ "	</form>" + "</body>" + "</html>");
-					
+
 				}
 				// Si el user si existe pero la password no le digo que se ha equivocado
 				else {
-					out.print("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>No valid password</h1>"
-							+ "<form action=\"index.jsp\" method=\"post\">\r\n"
-							+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
-							+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
-							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-							+ "	</form>" + "<div id=\"closeSession\">" + "<button type=\"button\">" + "Close session"
-							+ "</button>" + "</div>" + "<body></html>");
+					out.print(
+							"<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>No valid password</h1>"
+									+ "<form action=\"index.jsp\" method=\"post\">\r\n"
+									+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
+									+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
+									+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+									+ "	</form>" + "<div id=\"closeSession\">" + "<button type=\"button\">"
+									+ "Close session" + "</button>" + "</div>" + "<body></html>");
 				}
 			}
-		//Si hay problemas al conectar cod bd muestro y le mando atras
+			// Si hay problemas al conectar cod bd muestro y le mando atras
 		} catch (Exception e) {
-			out.println("<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Problem connecting with database</h1>"
-					+ "<form action=\"index.jsp\" method=\"post\">\r\n"
-					+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
-					+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
-					+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n" + "	</form>"
-					+ "</body></html>");
+			out.println(
+					"<html><head><link rel=\"stylesheet\" href=\"styles/index.css\"></head><body><h1>Problem connecting with database</h1>"
+							+ "<form action=\"index.jsp\" method=\"post\">\r\n" + "		<input type=\"text\" value="
+							+ name + "name=\"password\" hidden=\"\">\r\n" + "		<input type=\"text\" value="
+							+ password + " name=\"user\" hidden=\"\">\r\n"
+							+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
+							+ "	</form>" + "</body></html>");
 		}
 	}
 

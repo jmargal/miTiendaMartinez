@@ -1,9 +1,12 @@
+<%@page import="com.jacaranda.accesoDatos.BuyDAO"%>
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@page import="com.jacaranda.logica.Carro"%>
 <%@page import="com.jacaranda.accesoDatos.UserDAO"%>
 <%@page import="com.jacaranda.logica.User"%>
 <%@page import="com.jacaranda.accesoDatos.CategoryDAO"%>
 <%@page import="com.jacaranda.logica.Category"%>
 <%@page import="com.jacaranda.logica.Article"%>
+<%@page import="com.jacaranda.logica.Buy"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -37,11 +40,15 @@
 	//Si los datos son validos empiezo a procesar:
 	else {
 		//Con esos atributos busco y guardo ese user
-		User u = UserDAO.findUser(name);	
+		User u = UserDAO.findUser(name);
 	%>
-	<h1>Usuario: <%=name%></h1>
+	<h1>
+		Usuario:
+		<%=name%></h1>
 	<div id=cat>
-		<h2>Category: <%=c.getName()%></h2>
+		<h2>
+			Category:
+			<%=c.getName()%></h2>
 	</div>
 	<%
 	//Si es admin le saco que pueda aï¿½adir article
@@ -49,7 +56,7 @@
 	%>
 
 	<a href="addArticle.jsp?id=<%=id%>">
-	<button>Add new product</button>
+		<button>Add new product</button>
 	</a>
 	<br>
 
@@ -82,7 +89,7 @@
 			<td><%=a.getId_cat().getId_cat()%></td>
 			<td><%=a.getStock()%></td>
 			<td>
-			<!-- En este campo le esta el form para añadir al carrito
+				<!-- En este campo le esta el form para añadir al carrito
 				 Manda el id de ese articulo y una cantidad -->
 				<form action="addToCart.jsp" class="formBuy" method="post"
 					id="formCarrito">

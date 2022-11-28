@@ -1,7 +1,8 @@
 package com.jacaranda.accesoDatos;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import java.util.List;
 
 import org.hibernate.Session;
 
@@ -35,5 +36,14 @@ public class BuyDAO {
 		Buy b = null;
 		b = (Buy) session.get(Buy.class, id);
 		return b;
+	}
+
+	public static List<Buy> artsCompradosPor(User user_name) {
+		Session session = ConnectionBD.getSession();
+		List<Buy> arts = (List<Buy>) session
+				.createQuery("From BUY b " + " where b.user_name=:user_name", Buy.class)
+				.setParameter("user_name", user_name).list();
+		return arts;
+
 	}
 }
