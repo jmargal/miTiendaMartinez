@@ -15,9 +15,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>BuyComplete</title>
+<link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 
+	<h1>Success!</h1>
 
 	<%
 	//Recojo atributos de la sesion
@@ -43,6 +45,7 @@
 		int newCant=a.getStock()-cant;
 		ArticleDAO.changeStock(newCant, a.getId());
 	}
+	cart.getListaArts().clear();
 	%>
 
 	<form action="Login" method="post">

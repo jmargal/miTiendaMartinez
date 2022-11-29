@@ -145,8 +145,7 @@ public class Login extends HttpServlet {
 									+ "		<input type=\"text\" value=" + name + "name=\"password\" hidden=\"\">\r\n"
 									+ "		<input type=\"text\" value=" + password + " name=\"user\" hidden=\"\">\r\n"
 									+ "		<input type=\"submit\" name=\"boton\" id=\"boton\" value=\"Go back\">\r\n"
-									+ "	</form>" + "<div id=\"closeSession\">" + "<button type=\"button\">"
-									+ "Close session" + "</button>" + "</div>" + "<body></html>");
+									+ "	</form><body></html>");
 				}
 			}
 			// Si hay problemas al conectar cod bd muestro y le mando atras

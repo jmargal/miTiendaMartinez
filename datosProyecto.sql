@@ -41,7 +41,7 @@ CREATE TABLE tienda.BUY(
 id_article	int,
 user_name	varchar(50),
 price 		double,
-buy_date	datetime,
+buy_date	datetime
 );
 
 alter table tienda.BUY add constraint pk_tienda.BUY primary key (id_article,user_name,buy_date);

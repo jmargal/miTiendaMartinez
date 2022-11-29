@@ -41,7 +41,7 @@ public class BuyDAO {
 	public static List<Buy> artsCompradosPor(User user_name) {
 		Session session = ConnectionBD.getSession();
 		List<Buy> arts = (List<Buy>) session
-				.createQuery("From BUY b " + " where b.user_name=:user_name", Buy.class)
+				.createQuery("From BUY b " + " where b.user_name=:user_name order by b.buy_date DESC", Buy.class)
 				.setParameter("user_name", user_name).list();
 		return arts;
 

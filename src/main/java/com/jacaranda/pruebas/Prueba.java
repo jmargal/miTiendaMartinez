@@ -1,5 +1,6 @@
 package com.jacaranda.pruebas;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,11 +18,12 @@ public class Prueba {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Article a=ArticleDAO.findArticle(1);
-		User u=UserDAO.findUser("javi");
-
-		Buy b=BuyDAO.findBuy(a,u);
-		System.out.println(b);
+		System.out.println(UserDAO.addUser("Zari", "zari", "Fernando", LocalDate.now(), "M"));
+//		Article a=ArticleDAO.findArticle(1);
+//		User u=UserDAO.findUser("javi");
+//
+//		Buy b=BuyDAO.findBuy(a,u);
+//		System.out.println(b);
 	}
 
 }

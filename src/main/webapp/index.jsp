@@ -1,6 +1,6 @@
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@page import="java.net.URI"%>
-<%@page import="com.jacaranda.logica.Carro"%>
+<%@page import="com.jacaranda.logica.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
