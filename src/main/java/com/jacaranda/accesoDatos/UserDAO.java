@@ -33,7 +33,7 @@ public class UserDAO {
 		User u= new User(name, password, cName, birthday, gender);
 		try {
 			session.getTransaction().begin();
-			session.saveOrUpdate(u);
+			session.save(u);
 			session.getTransaction().commit();
 			resul=true;
 		}catch (Exception e) {
