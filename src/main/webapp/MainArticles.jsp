@@ -41,7 +41,8 @@
 	else {
 		//Con esos atributos busco y guardo ese user
 		User u = UserDAO.findUser(name);
-	%>
+	//Le imprimo el nombre y la categoría
+	%>	
 	<h1>
 		Usuario:
 		<%=name%></h1>

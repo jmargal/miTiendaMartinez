@@ -22,6 +22,10 @@
 	Carro cart = (Carro) sesion.getAttribute("carrito");
 	int cant = Integer.parseInt(request.getParameter("cant"));
 	int idArticle = Integer.parseInt(request.getParameter("idArticle"));
+	Article a=ArticleDAO.findArticle(idArticle);
+	if(cant>a.getStock()){
+		response.sendRedirect("noStock.jsp");
+	}
 	ItemCarrito item = new ItemCarrito(idArticle, cant);
 
 	//Me creo una lista con los items del carro
